@@ -1,0 +1,5 @@
+# Ignorando lo innecesario
+build/
+build.xml
+manifest.mf
+nbproject/
