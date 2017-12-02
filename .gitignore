@@ -1,5 +1,13 @@
 # Ignorando lo innecesario
-build/
-build.xml
-manifest.mf
+
+*.class
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+*.jar
+*.war
+*.ear
+
 nbproject/
