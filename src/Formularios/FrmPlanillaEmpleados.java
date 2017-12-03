@@ -5,7 +5,6 @@
  */
 package Formularios;
 
-import Clases.Empleado;
 import Clases.MiModeloTabla;
 import Clases.MyIcono;
 import javax.swing.JOptionPane;
@@ -133,7 +132,8 @@ public class FrmPlanillaEmpleados extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         // Se obtienen los nombres de todos los empleados
-        String empleados[] = {"Juan", "Carlos", "Javier"};
+        if (modelo.getRowCount() == 0) return;
+        String empleados[] = modelo.getEmpleados();
         
         // Se lee Empleado a modificar
         MyIcono icono = new MyIcono();
@@ -141,7 +141,7 @@ public class FrmPlanillaEmpleados extends javax.swing.JFrame {
         if(nombre != null){
             frmNuevo.setTitulo("Modificando al empleado "+nombre);
             frmNuevo.setVisible(true);
-            frmNuevo.modifica(nombre);
+            frmNuevo.modificaEmpleado(nombre);
         }                
     }//GEN-LAST:event_btnModifActionPerformed
 
@@ -149,14 +149,16 @@ public class FrmPlanillaEmpleados extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         // Se obtienen los nombres de todos los empleados
-        String empleados[] = {"Juan", "Carlos", "Javier"};
+        if (modelo.getRowCount() == 0) return;
+        
+        String empleados[] = modelo.getEmpleados();
         
         // Se lee Empleado a modificar
         MyIcono icono = new MyIcono();
         String nombre = (String)JOptionPane.showInputDialog(rootPane, "Empleado a eliminar", "Selección", JOptionPane.DEFAULT_OPTION, icono, empleados, empleados[0]);
         if(nombre != null){
             // procedemos a eliminar 
-            
+            modelo.borrarEmpleadoPorNombre(nombre);
             
             // una vez eliminado
             JOptionPane.showMessageDialog(rootPane, "Empleado eliminado correctamente");

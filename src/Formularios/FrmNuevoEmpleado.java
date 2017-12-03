@@ -30,8 +30,14 @@ public class FrmNuevoEmpleado extends javax.swing.JFrame {
         this.etSueldo.setText("");
     }
     
-    void modifica(String nombre) {
-        
+    void modificaEmpleado(String nombre) {
+        Empleado aux = FrmPlanillaEmpleados.modelo.getEmpleado(nombre);
+        FrmPlanillaEmpleados.modelo.borrarEmpleadoPorNombre(nombre);
+        this.etNom.setText(aux.getNombre());
+        this.etApelli.setText(aux.getApellido());
+        this.etCi.setText(aux.getCi());
+        this.etTurno.setText(aux.getTurno());
+        this.etSueldo.setText(aux.getSueldo()+"");
     }
     
     public void setTitulo(String titulo){
@@ -185,12 +191,11 @@ public class FrmNuevoEmpleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
-        
+        // TODO add your handling code here:        
         if(!esCorrectoDatos()){
             JOptionPane.showMessageDialog(rootPane, "Aún hay campos vacios");
             return;
-        }
+        }        
         
         Empleado emp = new Empleado();
         emp.setNombre(etNom.getText());

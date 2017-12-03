@@ -22,7 +22,36 @@ public class MiModeloTabla implements TableModel
      * El JTable será un suscriptor 
      */
     private LinkedList suscriptores = new LinkedList();
+    
+    public void borrarEmpleadoPorNombre(String nombre) {
+        int i;
+        for(i = 0; i < elementos.size(); i++){
+            if(((Empleado)elementos.get(i)).getNombre().equals(nombre))
+                elementos.remove(i);
+        }
+        // avisamos a los suscriptores de lo sucedido
+        TableModelEvent evento = new TableModelEvent(this, i-1, i-1,
+                TableModelEvent.ALL_COLUMNS, TableModelEvent.DELETE);
+        avisaSuscriptores(evento);
+    }
+    
 
+    public Empleado getEmpleado(String nombre){
+        Empleado aux = null;
+        for(int i = 0; i < elementos.size(); i++){
+            if(((Empleado)elementos.get(i)).getNombre().equals(nombre))
+                aux = (Empleado)elementos.get(i);
+        }
+        return aux;
+    }
+    
+    public String[] getEmpleados(){
+        String emps[] = new String[elementos.size()];
+        for(int i = 0; i < elementos.size(); i++)
+            emps[i] = ((Empleado)elementos.get(i)).getNombre();
+        return emps;
+    }
+    
     @Override
     public int getRowCount() {
         return elementos.size();
@@ -153,5 +182,4 @@ public class MiModeloTabla implements TableModel
         for(i = 0; i < suscriptores.size(); i++)
             ((TableModelListener)suscriptores.get(i)).tableChanged(evento);
     }
-    
 }
