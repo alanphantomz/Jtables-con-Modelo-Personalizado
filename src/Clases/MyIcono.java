@@ -19,7 +19,7 @@ public class MyIcono implements Icon{
 
     @Override
     public void paintIcon(Component c, Graphics g, int x, int y) {
-        Image image = new ImageIcon(getClass().getResource("/imgs/pencil.png")).getImage();
+        Image image = new ImageIcon(getClass().getResource("../imgs/pencil.png")).getImage();
         g.drawImage(image, x, y, c);
     }
  

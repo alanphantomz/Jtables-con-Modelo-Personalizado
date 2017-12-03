@@ -6,6 +6,7 @@
 package Formularios;
 
 import Clases.Empleado;
+import Clases.MiModeloTabla;
 import Clases.MyIcono;
 import javax.swing.JOptionPane;
 
@@ -19,10 +20,12 @@ public class FrmPlanillaEmpleados extends javax.swing.JFrame {
      * Creates new form FrmPlanillaEmpleados
      */
     // La ventana principal esta compuesta de una ventana inferior
-    FrmNuevoEmpleado frmNuevo = new FrmNuevoEmpleado();
+    private FrmNuevoEmpleado frmNuevo = new FrmNuevoEmpleado();
+    public static MiModeloTabla modelo = new MiModeloTabla();
     
     public FrmPlanillaEmpleados() {
         initComponents();
+        jTable1.setModel(modelo);
     }
 
     /**
@@ -66,6 +69,11 @@ public class FrmPlanillaEmpleados extends javax.swing.JFrame {
         });
 
         btnDelEmp.setText("Eliminar Empleado");
+        btnDelEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelEmpActionPerformed(evt);
+            }
+        });
 
         btnModif.setText("Modificar Empleado");
         btnModif.addActionListener(new java.awt.event.ActionListener() {
@@ -116,6 +124,7 @@ public class FrmPlanillaEmpleados extends javax.swing.JFrame {
 
     private void btnNuevoEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoEmpActionPerformed
         // TODO add your handling code here:
+        frmNuevo.setTitulo("Ingrese Datos de Empleado");
         frmNuevo.setVisible(true);
         frmNuevo.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnNuevoEmpActionPerformed
@@ -129,10 +138,30 @@ public class FrmPlanillaEmpleados extends javax.swing.JFrame {
         // Se lee Empleado a modificar
         MyIcono icono = new MyIcono();
         String nombre = (String)JOptionPane.showInputDialog(rootPane, "Empleado a modificar", "Selección", JOptionPane.DEFAULT_OPTION, icono, empleados, empleados[0]);
-        
-        frmNuevo.setVisible(true);
-        frmNuevo.modifica(nombre);
+        if(nombre != null){
+            frmNuevo.setTitulo("Modificando al empleado "+nombre);
+            frmNuevo.setVisible(true);
+            frmNuevo.modifica(nombre);
+        }                
     }//GEN-LAST:event_btnModifActionPerformed
+
+    private void btnDelEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelEmpActionPerformed
+        // TODO add your handling code here:
+        
+        // Se obtienen los nombres de todos los empleados
+        String empleados[] = {"Juan", "Carlos", "Javier"};
+        
+        // Se lee Empleado a modificar
+        MyIcono icono = new MyIcono();
+        String nombre = (String)JOptionPane.showInputDialog(rootPane, "Empleado a eliminar", "Selección", JOptionPane.DEFAULT_OPTION, icono, empleados, empleados[0]);
+        if(nombre != null){
+            // procedemos a eliminar 
+            
+            
+            // una vez eliminado
+            JOptionPane.showMessageDialog(rootPane, "Empleado eliminado correctamente");
+        }          
+    }//GEN-LAST:event_btnDelEmpActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelEmp;
